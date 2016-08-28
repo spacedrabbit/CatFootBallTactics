@@ -27,8 +27,8 @@ class ViewController: UIViewController {
     self.view.addSubview(self.fieldGrid)
     
     self.fieldGrid.snp_makeConstraints { (make) in
-      make.centerY.equalTo(self.view)
-      make.left.equalTo(self.view)
+      make.center.equalTo(self.view)
+//      make.top.left.equalTo(self.view)
     }
   }
 

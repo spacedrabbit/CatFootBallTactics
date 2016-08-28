@@ -44,8 +44,11 @@ class FieldGrid: UIView {
   
   // MARK: - Setup
   private func configureConstraints() {
-    let arrangedRows: [[GridSquare]] = self.configureRows()
+    var getTopLeftMostSquareToken: dispatch_once_t = 0
+    var topLeftMostSquare: GridSquare?
     
+    // first arrange the grid
+    let arrangedRows: [[GridSquare]] = self.configureRows()
     for (idxRow, row): (Int, [GridSquare]) in arrangedRows.enumerate() {
       
       var previousSquare: GridSquare?
@@ -58,10 +61,15 @@ class FieldGrid: UIView {
             make.size.equalTo(existingPriorSquare.snp_size)
           })
         }
-        else { // if starting a new row
+        else { // if starting a new row. this essentially "anchors" view to a set position to allow the other views in the same row to arrange themselves properly
+          dispatch_once(&getTopLeftMostSquareToken, {
+            topLeftMostSquare = square
+          })
+          
           square.snp_makeConstraints(closure: { (make) in
-            // set the top & left -most constraints to the leading edge
-            make.top.equalTo(self).offset(CGFloat(idxRow) * self.sideLength)
+            // set the top constraint to the current row * the row length
+            // set leftmost constraints to the leading edge of view
+            make.top.equalTo(self).offset(CGFloat(idxRow - 1) * self.sideLength) // idx starts at 1, not zero apparently
             make.left.equalTo(self)
           })
 
@@ -74,7 +82,12 @@ class FieldGrid: UIView {
         previousSquare = square
         
       }
-      
+    }
+    
+    // then update container view size
+    self.snp_makeConstraints { (make) in
+      make.size.equalTo(CGSizeMake(self.sideLength * self.gridSize.dx, self.sideLength * self.gridSize.dy))
+      make.top.left.equalTo(topLeftMostSquare!)
     }
   }
   
