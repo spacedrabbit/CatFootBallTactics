@@ -12,6 +12,9 @@
 		1435073A1D7340B40076EB6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 143507381D7340B40076EB6E /* Main.storyboard */; };
 		1435073C1D7340B40076EB6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1435073B1D7340B40076EB6E /* Assets.xcassets */; };
 		1435073F1D7340B40076EB6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1435073D1D7340B40076EB6E /* LaunchScreen.storyboard */; };
+		143507471D734A040076EB6E /* GridSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143507461D734A040076EB6E /* GridSquare.swift */; };
+		1435074B1D734A670076EB6E /* FieldGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435074A1D734A670076EB6E /* FieldGrid.swift */; };
+		F856A936D4C50F1ABDE9EA52 /* Pods_CatFootBallTactics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7CA55F047E3EF401C926AFE /* Pods_CatFootBallTactics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,11 @@
 		1435073B1D7340B40076EB6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1435073E1D7340B40076EB6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		143507401D7340B40076EB6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		143507461D734A040076EB6E /* GridSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GridSquare.swift; path = Views/GridSquare.swift; sourceTree = "<group>"; };
+		1435074A1D734A670076EB6E /* FieldGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FieldGrid.swift; path = Views/FieldGrid.swift; sourceTree = "<group>"; };
+		9F03BC2C0F0FAEF8461090AE /* Pods-CatFootBallTactics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatFootBallTactics.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CatFootBallTactics/Pods-CatFootBallTactics.debug.xcconfig"; sourceTree = "<group>"; };
+		CEFFEEFA0487F74719DB3BAD /* Pods-CatFootBallTactics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatFootBallTactics.release.xcconfig"; path = "Pods/Target Support Files/Pods-CatFootBallTactics/Pods-CatFootBallTactics.release.xcconfig"; sourceTree = "<group>"; };
+		E7CA55F047E3EF401C926AFE /* Pods_CatFootBallTactics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CatFootBallTactics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +37,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F856A936D4C50F1ABDE9EA52 /* Pods_CatFootBallTactics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D5DCE544017A4304E30DFE6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E7CA55F047E3EF401C926AFE /* Pods_CatFootBallTactics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		143507281D7340B40076EB6E = {
 			isa = PBXGroup;
 			children = (
 				143507331D7340B40076EB6E /* CatFootBallTactics */,
 				143507321D7340B40076EB6E /* Products */,
+				46C93BF72A4B0AE4AB3D4BAA /* Pods */,
+				0D5DCE544017A4304E30DFE6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +73,41 @@
 		143507331D7340B40076EB6E /* CatFootBallTactics */ = {
 			isa = PBXGroup;
 			children = (
-				143507341D7340B40076EB6E /* AppDelegate.swift */,
 				143507361D7340B40076EB6E /* ViewController.swift */,
+				143507481D734A090076EB6E /* Views */,
+				143507491D734A130076EB6E /* Supporting Files */,
+			);
+			path = CatFootBallTactics;
+			sourceTree = "<group>";
+		};
+		143507481D734A090076EB6E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1435074A1D734A670076EB6E /* FieldGrid.swift */,
+				143507461D734A040076EB6E /* GridSquare.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		143507491D734A130076EB6E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				143507341D7340B40076EB6E /* AppDelegate.swift */,
 				143507381D7340B40076EB6E /* Main.storyboard */,
 				1435073B1D7340B40076EB6E /* Assets.xcassets */,
 				1435073D1D7340B40076EB6E /* LaunchScreen.storyboard */,
 				143507401D7340B40076EB6E /* Info.plist */,
 			);
-			path = CatFootBallTactics;
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		46C93BF72A4B0AE4AB3D4BAA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9F03BC2C0F0FAEF8461090AE /* Pods-CatFootBallTactics.debug.xcconfig */,
+				CEFFEEFA0487F74719DB3BAD /* Pods-CatFootBallTactics.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +117,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 143507431D7340B40076EB6E /* Build configuration list for PBXNativeTarget "CatFootBallTactics" */;
 			buildPhases = (
+				233DE9235C021920C6262CD0 /* [CP] Check Pods Manifest.lock */,
 				1435072D1D7340B40076EB6E /* Sources */,
 				1435072E1D7340B40076EB6E /* Frameworks */,
 				1435072F1D7340B40076EB6E /* Resources */,
+				B7EFBE170E082AA10B637251 /* [CP] Embed Pods Frameworks */,
+				ECB0B4AB0BA1AD5FE18E59A7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,12 +179,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		233DE9235C021920C6262CD0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B7EFBE170E082AA10B637251 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CatFootBallTactics/Pods-CatFootBallTactics-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ECB0B4AB0BA1AD5FE18E59A7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CatFootBallTactics/Pods-CatFootBallTactics-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1435072D1D7340B40076EB6E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1435074B1D734A670076EB6E /* FieldGrid.swift in Sources */,
 				143507371D7340B40076EB6E /* ViewController.swift in Sources */,
+				143507471D734A040076EB6E /* GridSquare.swift in Sources */,
 				143507351D7340B40076EB6E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,6 +346,7 @@
 		};
 		143507441D7340B40076EB6E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F03BC2C0F0FAEF8461090AE /* Pods-CatFootBallTactics.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CatFootBallTactics/Info.plist;
@@ -258,6 +358,7 @@
 		};
 		143507451D7340B40076EB6E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CEFFEEFA0487F74719DB3BAD /* Pods-CatFootBallTactics.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CatFootBallTactics/Info.plist;
@@ -286,6 +387,7 @@
 				143507451D7340B40076EB6E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
