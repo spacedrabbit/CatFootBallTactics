@@ -99,9 +99,9 @@ class GridSquare: UIView, UIGestureRecognizerDelegate {
           movingLeft = false
         }
         
-        let logVelocity = log(abs(currentVelocity.x))
-        print("current velocity: \(currentVelocity)")
-        print("current logarithmic velocity: \(logVelocity)")
+        let logVelocity = log(abs(currentVelocity.x)) // oh, and sometimes this is infinity... so that needs adjustment
+//        print("current velocity: \(currentVelocity)")
+//        print("current logarithmic velocity: \(logVelocity)")
         
         
         // this is a little hacky, but I didn't like that it was difficult under certain cases to 
