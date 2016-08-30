@@ -42,7 +42,7 @@ class GridSquare: UIView, UIGestureRecognizerDelegate {
     self.addGestureRecognizer(tapGesture)
     
     let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(GridSquare.toggleLongPress(_:)))
-    longPressGesture.minimumPressDuration = 0.45
+    longPressGesture.minimumPressDuration = 0.25
     longPressGesture.delegate = self
     self.addGestureRecognizer(longPressGesture)
     
@@ -86,7 +86,26 @@ class GridSquare: UIView, UIGestureRecognizerDelegate {
         let translation = panSender.translationInView(self)
         let currentVelocity = panSender.velocityInView(self)
         
-        // TODO: set conversion for changing label text
+        var movingLeft: Bool = false
+        if currentVelocity.x <= 0 {
+          movingLeft = true
+        } else {
+          movingLeft = false
+        }
+        
+        let logVelocity = log(abs(currentVelocity.x))
+        print("current velocity: \(currentVelocity)")
+        print("current logarithmic velocity: \(logVelocity)")
+        
+        
+        if movingLeft && self.gridSkillValue > 0 {
+          self.gridSkillValue -= Int(floor(logVelocity))
+        }
+        else {
+          self.gridSkillValue += Int(floor(logVelocity))
+        }
+        
+        self.skillLevelLabel.text = "\(self.gridSkillValue)"
       }
     }
   }
