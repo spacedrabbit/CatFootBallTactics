@@ -15,6 +15,14 @@ class FieldGrid: UIView {
   internal var gridSize: CGVector = CGVector(dx: 0, dy: 0)
   internal var gridPositions: [CGVector] = []
   
+  // I remembered too late that I would need 2 squares/positions for the goalies
+  // Probably the easier route would be to tack on the grids where I know they will be, but I'd rather
+  // implement it such that when the array of rows are being created, it pre- & post- appends an additional row with a single
+  // grid position at ceil(gridSize.y / 2). Will take a little bit of time to rewrite, so will leave this as a...
+  // TODO: See above
+  
+//  internal var gridPositionGoalieAI: CGVector?
+//  internal var gridPositionGoaliePlayer: CGVector?
   
   // MARK: - Initialization
   convenience init(gridsWithSize size: CGVector, gridLength: CGFloat) {
@@ -63,7 +71,7 @@ class FieldGrid: UIView {
         }
         else { // if starting a new row. this essentially "anchors" view to a set position to allow the other views in the same row to arrange themselves properly
           dispatch_once(&getTopLeftMostSquareToken, {
-            topLeftMostSquare = square
+            topLeftMostSquare = square // the very first iteration of the for loop will enter this block
           })
           
           square.snp_makeConstraints(closure: { (make) in

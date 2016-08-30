@@ -33,6 +33,11 @@ class GridSquare: UIView, UIGestureRecognizerDelegate {
     }
   }
   
+  // log updating too frequently. maybe a timer?
+  var timeSinceLastUpdate: NSTimeInterval = 0.0
+  var lastUpdated: NSDate = NSDate()
+  
+  // MARK: - Initialization
   convenience init(withGridPosition pos: CGVector) {
     self.init(frame: CGRectZero)
     self.gridPosition = pos
@@ -66,6 +71,8 @@ class GridSquare: UIView, UIGestureRecognizerDelegate {
     fatalError()
   }
   
+  
+  // MARK: - Helpers
   internal func changeTeam(sender: AnyObject?) {
     switch self.team {
     case .None:
@@ -83,7 +90,6 @@ class GridSquare: UIView, UIGestureRecognizerDelegate {
   internal func adjustLabelValue(sender: AnyObject?) {
     if self.currentlyLongPressing {
       if let panSender: UIPanGestureRecognizer = sender as? UIPanGestureRecognizer {
-        let translation = panSender.translationInView(self)
         let currentVelocity = panSender.velocityInView(self)
         
         var movingLeft: Bool = false
@@ -98,21 +104,44 @@ class GridSquare: UIView, UIGestureRecognizerDelegate {
         print("current logarithmic velocity: \(logVelocity)")
         
         
-        if movingLeft && self.gridSkillValue > 0 {
-          self.gridSkillValue -= Int(floor(logVelocity))
+        // this is a little hacky, but I didn't like that it was difficult under certain cases to 
+        // change the label value by 1. So, I do a check to see if that last time it was updated is 
+        // less than 1/10th of a second, to increment the value by 1 instead of whatever the log(velocity) is
+        // makes it easier to increment/decrement by 1, while allowing for quickingly jumping values
+        // though it also introduces a bug that allows for values less than zero. 
+        // if this was a production app, I would fix it, but since it's personal use... meh. 
+        let rightNow: NSDate = NSDate()
+        self.timeSinceLastUpdate = rightNow.timeIntervalSinceDate(self.lastUpdated)
+        self.lastUpdated = rightNow
+        if timeSinceLastUpdate < 0.1 {
+          if movingLeft && self.gridSkillValue > 0 {
+            self.gridSkillValue -= Int(floor(logVelocity))
+          }
+          else {
+            self.gridSkillValue += Int(floor(logVelocity))
+          }
         }
         else {
-          self.gridSkillValue += Int(floor(logVelocity))
+          if movingLeft && self.gridSkillValue > 0 {
+            self.gridSkillValue -= 1
+          }
+          else {
+            self.gridSkillValue += 1
+          }
         }
-        
+      
         self.skillLevelLabel.text = "\(self.gridSkillValue)"
       }
     }
   }
   
+  
+  // TODO: Id like for the square to do some simple animation to indicate its long press state is active
   internal func toggleLongPress(sender: AnyObject?) {
+    print("TOGGLING!!")
     self.currentlyLongPressing = !self.currentlyLongPressing
   }
+
   
   // MARK: - Gesture Delegate
   override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -121,12 +150,13 @@ class GridSquare: UIView, UIGestureRecognizerDelegate {
     }
     
     if self.team != .None && (gestureRecognizer is UILongPressGestureRecognizer || gestureRecognizer is UIPanGestureRecognizer){
+      
       // I only want to update the label if the team square is assigned
       return true
     }
     return false
   }
-  
+
   func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
     if gestureRecognizer is UILongPressGestureRecognizer && otherGestureRecognizer is UIPanGestureRecognizer {
       return true
